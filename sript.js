@@ -1,22 +1,50 @@
 function slideShow() {
-  const pictures = [...document.querySelectorAll(".picture")];
+  const curPic = document.querySelector(".picture");
   const imagePos = document.querySelector(".image-position");
-  let count = 1;
-  setInterval(() => {
-    if (pictures[4].classList.contains("visible")) {
-      pictures[4].classList.remove("visible");
-      pictures[0].classList.add("visible");
-    }
-    if (count - 1 >= 0) {
-      pictures[count - 1].classList.remove("visible");
-    }
-    pictures[count].classList.add("visible");
-    imagePos.textContent = `${count + 1} / ${pictures.length}`;
-    count++;
-    if (count === 5) {
-      count = 0;
-    }
-  }, 2000);
+  const dots = document.querySelectorAll(".dot");
+  const arrows = document.querySelectorAll(".arrow");
+  const pictures = [
+    "./images/image1.jpg",
+    "./images/image2.jpeg",
+    "./images/image3.jpg",
+    "./images/image4.jpg",
+    "./images/image5.jpg",
+  ];
+
+  let interval;
+  let index = 0;
+
+  function updateStatus() {
+    curPic.src = pictures[index];
+    imagePos.textContent = `${index + 1}/${pictures.length}`;
+  }
+
+  function startInterval() {
+    clearInterval(interval);
+    interval = setInterval(() => {
+      index++;
+      if (index >= pictures.length) {
+        index = 0;
+      }
+      updateStatus();
+    }, 2000);
+  }
+
+  arrows.forEach((arrow) => {
+    arrow.addEventListener("click", (e) => {
+      if (e.target.classList.contains("right-arrow")) {
+        index++;
+        if (index + 1 > pictures.length) index = 0;
+      } else {
+        index--;
+        if (index < 0) index = pictures.length - 1;
+      }
+      updateStatus();
+      startInterval();
+    });
+  });
+  updateStatus();
+  startInterval();
 }
 
 slideShow();

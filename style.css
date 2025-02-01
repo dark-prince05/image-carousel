@@ -48,7 +48,7 @@ img {
   position: absolute;
   width: 120px;
   background-color: #ffffff70;
-  border-radius: 10px;
+  border-radius: 20px;
   height: 30px;
   display: flex;
   justify-content: space-evenly;
@@ -61,10 +61,10 @@ img {
   height: auto;
 }
 
-.picture {
-  display: none;
+.dot:hover {
+  width: 15px;
 }
 
-.picture.visible {
-  display: block;
+.dot.active {
+  width: 15px;
 }
