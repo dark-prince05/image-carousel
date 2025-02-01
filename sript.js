@@ -10,11 +10,17 @@ function slideShow() {
     "./images/image4.jpg",
     "./images/image5.jpg",
   ];
-
   let interval;
   let index = 0;
+  const DELAY = 5000;
 
   function updateStatus() {
+    for (const dot of dots) {
+      if (dot.classList.contains("active")) {
+        dot.classList.remove("active");
+      }
+    }
+    dots[index].classList.add("active");
     curPic.src = pictures[index];
     imagePos.textContent = `${index + 1}/${pictures.length}`;
   }
@@ -27,7 +33,7 @@ function slideShow() {
         index = 0;
       }
       updateStatus();
-    }, 2000);
+    }, DELAY);
   }
 
   arrows.forEach((arrow) => {
@@ -43,6 +49,15 @@ function slideShow() {
       startInterval();
     });
   });
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", (e) => {
+      index = parseInt(e.target.id);
+      updateStatus();
+      startInterval();
+    });
+  });
+
   updateStatus();
   startInterval();
 }
