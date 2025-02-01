@@ -12,7 +12,7 @@ function slideShow() {
   ];
   let interval;
   let index = 0;
-  const DELAY = 5000;
+  const DELAY = 3000;
 
   function updateStatus() {
     for (const dot of dots) {
